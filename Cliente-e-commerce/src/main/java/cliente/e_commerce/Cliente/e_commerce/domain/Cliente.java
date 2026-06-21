@@ -22,4 +22,5 @@ public class Cliente {
     private String name;
     private String lastName;
     private String cpf;
+    private String codigo;
 }
