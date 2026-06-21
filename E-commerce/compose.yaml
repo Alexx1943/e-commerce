@@ -1,0 +1,30 @@
+services:
+  cliente_mysql:
+    image: mysql:9.4.0
+    container_name: cliente_MySQL
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345
+      MYSQL_DATABASE: cliente_db
+      MYSQL_USER: alexx
+      MYSQL_PASSWORD: 1234
+    ports:
+      - "3307:3306"
+    volumes:
+      - cliente-db:/var/lib/mysql
+
+  produto_mysql:
+    image: mysql:9.4.0
+    container_name: produto_MySQL
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345
+      MYSQL_DATABASE: produto_db
+      MYSQL_USER: alexx
+      MYSQL_PASSWORD: 1234
+    ports:
+      - "3308:3306"
+    volumes:
+      - produto-db:/var/lib/mysql
+
+volumes:
+  cliente-db:
+  produto-db:
