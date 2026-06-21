@@ -38,13 +38,9 @@ public class ClienteService {
 
     public void update(Cliente cliente){
 
-        var id = findById(cliente.getId());
+        var clienteToUpdate = findById(cliente.getId());
 
-        id.setName(cliente.getName());
-        id.setLastName(cliente.getLastName());
-        id.setCpf(cliente.getCpf());
-
-        var clientUpted = save(id);
+        save(cliente);
     }
 
     public void  delete(Long id){
