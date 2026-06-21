@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: Produto-e-commerce
+
+    datasource:
+      url: jdbc:mysql://localhost:3308/produto_db?createDatabaseIfNotExist=true
+      username: alexx
+      password: 1234
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+      jpa:
+        hibernate:
+          ddl-auto: update
+        show-sql: true
