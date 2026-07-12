@@ -1,10 +1,7 @@
 package cliente.e_commerce.Cliente.e_commerce.domain;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -19,8 +16,24 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String name;
-    private String lastName;
+
+    @Column(nullable = false)
     private String cpf;
-    private String codigo;
+
+    @Column
+    private String logradouro;
+
+    @Column
+    private Long numero;
+
+    @Column
+    private String bairro;
+
+    @Column
+    private String email;
+
+    @Column
+    private String telefone;
 }

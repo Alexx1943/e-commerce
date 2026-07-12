@@ -16,5 +16,6 @@
 	<modules>
 		<module>Cliente-e-commerce</module>
 		<module>Produto-e-commerce</module>
+		<module>Pedidos-e-commerce</module>
 	</modules>
 </project>
