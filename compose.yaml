@@ -25,6 +25,20 @@ services:
     volumes:
       - produto-db:/var/lib/mysql
 
+  pedido_mysql:
+    image: mysql:9.4.0
+    container_name: pedido_MySQL
+    environment:
+      MYSQL_ROOT_PASSWORD: ${PEDIDO_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${PEDIDO_DATABASE}
+      MYSQL_USER: ${PEDIDO_USERNAME}
+      MYSQL_PASSWORD: ${PEDIDO_PASSWORD}
+    ports:
+      - "3309:3306"
+    volumes:
+      - pedido-db:/var/lib/mysql
+
 volumes:
   cliente-db:
   produto-db:
+  pedido-db:
