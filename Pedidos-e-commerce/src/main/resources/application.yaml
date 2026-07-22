@@ -1,6 +1,3 @@
-server:
-  port: 8091
-
 spring:
   application:
     name: Pedido-e-commerce
@@ -15,3 +12,6 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+  server:
+    port: 8091
