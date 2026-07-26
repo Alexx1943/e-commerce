@@ -7,6 +7,7 @@ import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -25,6 +26,9 @@ public class Pedido {
 
     @Column
     private LocalDateTime dataPedido;
+
+    @OneToMany(mappedBy = "codigoPedido")
+    private List<ItemPedido> itensPedidos;
 
     @Column
     private BigDecimal total;
