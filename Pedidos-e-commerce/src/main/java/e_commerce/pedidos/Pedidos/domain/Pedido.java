@@ -2,8 +2,11 @@ package e_commerce.pedidos.Pedidos.domain;
 
 
 import e_commerce.pedidos.Pedidos.domain.eunus.StatusPedido;
+import e_commerce.pedidos.Pedidos.domain.eunus.TipoPagamento;
+import e_commerce.pedidos.Pedidos.dto.DadosPagamentoDTO;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.cache.spi.support.AbstractReadWriteAccess;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -48,4 +51,11 @@ public class Pedido {
 
     @Column
     private String urlNotaFiscal;
+
+    @Transient
+    private DadosPagamentoDTO dadosPagamento;
+
+
+    @OneToMany(mappedBy = "idPedido")
+    private List<ItemPedido> itensPedido;
 }

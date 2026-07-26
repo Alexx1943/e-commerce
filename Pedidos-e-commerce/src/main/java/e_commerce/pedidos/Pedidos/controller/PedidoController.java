@@ -1,10 +1,9 @@
 package e_commerce.pedidos.Pedidos.controller;
 
 
-import e_commerce.pedidos.Pedidos.domain.Pedido;
 import e_commerce.pedidos.Pedidos.dto.request.PostPedido;
 import e_commerce.pedidos.Pedidos.dto.response.GetPedido;
-import e_commerce.pedidos.Pedidos.mapper.MapperPedido;
+import e_commerce.pedidos.Pedidos.mapper.PedidoMapper;
 import e_commerce.pedidos.Pedidos.service.PedidoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,17 +19,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class PedidoController {
 
     private final PedidoService service;
-    private final MapperPedido mapper;
+    private final PedidoMapper mapper;
 
 
     @PostMapping("/save")
     public ResponseEntity<GetPedido> save(@RequestBody PostPedido postPedido) {
 
-        Pedido post = mapper.postToPedido(postPedido);
+        var postToPedido = mapper.postToPedido(postPedido);
 
-        Pedido pedido = service.savePedido(post);
+        var pedido = service.savePedido(postToPedido);
 
-        GetPedido response = mapper.getPedido(pedido);
+        var response = mapper.getPedido(pedido);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
