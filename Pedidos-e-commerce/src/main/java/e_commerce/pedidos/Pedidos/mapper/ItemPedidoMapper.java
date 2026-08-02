@@ -6,6 +6,8 @@ import e_commerce.pedidos.Pedidos.dto.request.PostItemPedido;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 
+import java.util.List;
+
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface ItemPedidoMapper {
 

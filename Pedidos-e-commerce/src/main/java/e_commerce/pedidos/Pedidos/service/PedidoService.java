@@ -16,9 +16,8 @@ public class PedidoService {
     private final PedidoValidador validador;
 
 
+    public Pedido savePedido(Pedido pedido) {
 
-    public Pedido savePedido(Pedido pedido){
-
-
+        return pedido;
     }
 }
