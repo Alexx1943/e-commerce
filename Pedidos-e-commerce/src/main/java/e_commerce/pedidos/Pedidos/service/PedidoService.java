@@ -26,13 +26,9 @@ public class PedidoService {
 
         validador.validar(pedido);
 
-        repository.save(pedido);
+        realizarPersistencia(pedido);
 
-        itemPedidoRepository.saveAll(pedido.getItensPedido());
-
-        var chavePagamento = bancoClient.solicitarPagamento(pedido);
-
-        pedido.setChavePagamento(chavePagamento);
+        solicitacaoPagamento(pedido);
 
         return pedido;
     }
@@ -40,5 +36,18 @@ public class PedidoService {
     public List<Pedido> findAll() {
 
         return repository.findAll();
+    }
+
+
+    private void solicitacaoPagamento(Pedido pedido) {
+
+        var chavePagamento = bancoClient.solicitarPagamento(pedido);
+        pedido.setChavePagamento(chavePagamento);
+    }
+
+    private void realizarPersistencia(Pedido pedido) {
+
+        repository.save(pedido);
+        itemPedidoRepository.saveAll(pedido.getItensPedido());
     }
 }
