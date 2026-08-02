@@ -7,10 +7,10 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public record GetPedido(Long idPedidos,
+public record GetPedido(Long idPedido,
                         Long idCliente,
                         LocalDateTime dataPedido,
-                        List<ItemPedido> itemPedidos,
+                        List<GetItemPedido> itensPedido,
                         BigDecimal total,
                         String chavePagamento,
                         StatusPedido status,

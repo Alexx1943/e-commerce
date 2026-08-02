@@ -8,10 +8,9 @@ import e_commerce.pedidos.Pedidos.service.PedidoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/pedidos")
@@ -32,5 +31,15 @@ public class PedidoController {
         var response = mapper.getPedido(pedido);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<GetPedido>> findAll() {
+
+        var all = service.findAll();
+
+        var response = mapper.getPedidoList(all);
+
+        return ResponseEntity.ok().body(response);
     }
 }

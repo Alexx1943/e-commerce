@@ -25,9 +25,7 @@ public class Pedido {
 
     private LocalDateTime dataPedido;
 
-    @OneToMany(mappedBy = "pedido",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
+    @OneToMany(mappedBy = "pedido")
     private List<ItemPedido> itensPedido;
 
     private BigDecimal total;
