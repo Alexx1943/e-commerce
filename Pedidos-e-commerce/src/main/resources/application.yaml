@@ -15,3 +15,12 @@ spring:
 
 server:
   port: 8095
+
+ecommerce:
+  pedidos:
+
+    produtos:
+      url: "http://localhost:8091/produtos"
+
+    clientes:
+      url: "http://localhost:8090/clientes"
