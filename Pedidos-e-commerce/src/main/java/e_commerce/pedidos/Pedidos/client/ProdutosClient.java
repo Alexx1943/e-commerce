@@ -1,13 +1,15 @@
 package e_commerce.pedidos.Pedidos.client;
 
+import e_commerce.pedidos.Pedidos.client.represention.ProdutoRepresention;
+import e_commerce.pedidos.Pedidos.domain.ItemPedido;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(name = "produtos", url = "${ecommerce.pedidos.produtos}")
+@FeignClient(name = "produtos", url = "${ecommerce.pedidos.produtos.url}")
 public interface ProdutosClient {
 
-    @GetMapping("/findById")
-    ResponseEntity<ProdutosClient> findbyId(@PathVariable Long id);
+    @GetMapping("/findById/{id}")
+    ResponseEntity<ProdutoRepresention> findbyId(@PathVariable ItemPedido id);
 }

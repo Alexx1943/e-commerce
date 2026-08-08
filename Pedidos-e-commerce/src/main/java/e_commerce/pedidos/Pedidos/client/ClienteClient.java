@@ -7,9 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(name = "produtos", url = "${ecommerce.pedidos.clientes}")
+@FeignClient(name = "clientes", url = "${ecommerce.pedidos.clientes.url}")
 public interface ClienteClient {
 
     @GetMapping("{id}")
-    public ResponseEntity<ClienteRepresention> findbyId(@PathVariable Long id);
+    ResponseEntity<ClienteRepresention> findbyId(@PathVariable Long id);
 }

@@ -38,7 +38,6 @@ public class PedidoService {
         return repository.findAll();
     }
 
-
     private void solicitacaoPagamento(Pedido pedido) {
 
         var chavePagamento = bancoClient.solicitarPagamento(pedido);
