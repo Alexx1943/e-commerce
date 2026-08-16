@@ -33,7 +33,7 @@ public class ProdutoController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/findById")
+    @GetMapping("/findById/{id}")
     public ResponseEntity<Produto> findbyId(@PathVariable Long id) {
 
         var response = service.findById(id);

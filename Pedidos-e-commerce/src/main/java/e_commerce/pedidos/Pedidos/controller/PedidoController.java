@@ -1,6 +1,7 @@
 package e_commerce.pedidos.Pedidos.controller;
 
 
+import e_commerce.pedidos.Pedidos.domain.Pedido;
 import e_commerce.pedidos.Pedidos.dto.request.PostPedido;
 import e_commerce.pedidos.Pedidos.dto.response.GetPedido;
 import e_commerce.pedidos.Pedidos.mapper.PedidoMapper;
@@ -41,6 +42,23 @@ public class PedidoController {
         var response = mapper.getPedidoList(all);
 
         return ResponseEntity.ok().body(response);
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<GetPedido> findById(@PathVariable Long id) {
+
+        Pedido byId = service.findById(id);
+        GetPedido respponse = mapper.getPedido(byId);
+
+        return ResponseEntity.ok(respponse);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Void> deleteAll() {
+
+        service.deleteAll();
+
+        return ResponseEntity.noContent().build();
     }
 
 }
