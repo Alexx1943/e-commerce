@@ -2,6 +2,7 @@ package e_commerce.pedidos.Pedidos.controller;
 
 
 import e_commerce.pedidos.Pedidos.domain.Pedido;
+import e_commerce.pedidos.Pedidos.dto.request.PostNovoPagamentoDTO;
 import e_commerce.pedidos.Pedidos.dto.request.PostPedido;
 import e_commerce.pedidos.Pedidos.dto.response.GetPedido;
 import e_commerce.pedidos.Pedidos.mapper.PedidoMapper;
@@ -32,6 +33,13 @@ public class PedidoController {
         var response = mapper.getPedido(pedido);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @PostMapping("pagamentos")
+    public ResponseEntity<Object> novoPagamentoto(@RequestBody PostNovoPagamentoDTO dto){
+
+        service.adicionarNovoPagamento(dto.idPedido(), dto.dadosCartao(), dto.tipoPagamento());
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping

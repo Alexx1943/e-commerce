@@ -1,8 +1,10 @@
 package e_commerce.pedidos.Pedidos.service;
 
 import e_commerce.pedidos.Pedidos.client.ServicoBancarioCliente;
+import e_commerce.pedidos.Pedidos.domain.DadosPagamento;
 import e_commerce.pedidos.Pedidos.domain.Pedido;
 import e_commerce.pedidos.Pedidos.domain.eunus.StatusPedido;
+import e_commerce.pedidos.Pedidos.domain.eunus.TipoPagamento;
 import e_commerce.pedidos.Pedidos.repository.ItemPedidoRepository;
 import e_commerce.pedidos.Pedidos.repository.PedidoRepository;
 import e_commerce.pedidos.Pedidos.validador.PedidoValidador;
@@ -14,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -71,7 +74,7 @@ public class PedidoService {
         var pedidoEncontrado = repository.findByIdPedidoAndChavePagamento(idPedido, chavePagamento);
 
         if (pedidoEncontrado.isEmpty()) {
-            var mensagem = String.format("Pedido não encontrado, código: %d echave de pagamentos &s", idPedido, chavePagamento);
+            var mensagem = String.format("Pedido não encontrado, código: %d e chave de pagamentos &s", idPedido, chavePagamento);
             log.error(mensagem);
         }
         Pedido pedido = pedidoEncontrado.get();
@@ -84,6 +87,33 @@ public class PedidoService {
         }
         repository.save(pedido);
     }
+
+    @Transactional
+    public void adicionarNovoPagamento(Long idPedido, String dadosCartao, TipoPagamento tipoPagamento){
+
+        var pedidoEncontrado = repository.findById(idPedido);
+
+        if (pedidoEncontrado.isEmpty()){
+            return;
+        }
+
+        Pedido pedido = pedidoEncontrado.get();
+
+        DadosPagamento dadosPagamento = new DadosPagamento();
+        dadosPagamento.setTipoPagamento(tipoPagamento);
+        dadosPagamento.setDados(dadosCartao);
+
+        pedido.setDadosPagamento(dadosPagamento);
+        pedido. setStatus(StatusPedido.REALIZADO);
+        pedido.setObservacoes("Novo pagamento realizado, aguardando novo processamento.");
+
+
+        String novaChavePagamento = bancoClient.solicitarPagamento(pedido);
+        pedido.setChavePagamento(novaChavePagamento);
+
+        repository.save(pedido);
+    }
+
 
 
 }
